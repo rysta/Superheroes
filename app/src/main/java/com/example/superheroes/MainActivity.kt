@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-//                    Greeting("Android")
+                    HeroesApp()
                 }
             }
         }
@@ -44,7 +44,10 @@ fun HeroesApp(modifier: Modifier = Modifier){
         items(heroes){
             HeroItem(
                 hero = it,
-                modifier = modifier.padding(dimensionResource(R.dimen.padding_small))
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(R.dimen.padding_medium),
+                    vertical = dimensionResource(R.dimen.padding_small)
+                )
             )
         }
     }
@@ -54,6 +57,6 @@ fun HeroesApp(modifier: Modifier = Modifier){
 @Composable
 fun GreetingPreview() {
     SuperheroesTheme {
-        HeroesApp(Modifier)
+        HeroesApp()
     }
 }

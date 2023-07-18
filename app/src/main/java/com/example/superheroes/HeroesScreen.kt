@@ -1,9 +1,11 @@
 package com.example.superheroes
 
 import HeroesRepository
+import HeroesRepository.heroes
 import android.graphics.drawable.shapes.Shape
 import android.widget.Space
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +22,7 @@ import androidx.compose.material3.CardElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -37,19 +40,19 @@ fun HeroItem(hero: Hero, modifier: Modifier = Modifier){
             .cardElevation(
                 defaultElevation = dimensionResource(R.dimen.card_elevation)
             ),
-        modifier = modifier.clip(RoundedCornerShape(dimensionResource(R.dimen.card_clip)))
+        modifier = modifier
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .sizeIn(minHeight = dimensionResource(R.dimen.card_size))
                 .padding(dimensionResource(R.dimen.padding_medium))
+                .sizeIn(minHeight = dimensionResource(R.dimen.card_size))
         ) {
             HeroInformation(hero)
             Spacer(
                 modifier = Modifier.width(dimensionResource(R.dimen.between_text_image_spacer))
             )
-            HeroImage(hero, Modifier)
+            HeroImage(hero)
         }
     }
 }
@@ -70,13 +73,24 @@ fun HeroInformation(hero: Hero) {
 }
 
 @Composable
-fun HeroImage(hero: Hero, modifier: Modifier = Modifier) {
-    Image(
-        painter = painterResource(hero.imageRes),
-        contentDescription = stringResource(hero.descriptionRes),
-        contentScale = ContentScale.Crop,
-        modifier = modifier
+fun HeroImage(hero: Hero) {
+    Box(
+        modifier = Modifier
             .size(dimensionResource(R.dimen.image_size))
             .clip(MaterialTheme.shapes.small)
-    )
+    ){
+        Image(
+            painter = painterResource(hero.imageRes),
+            contentDescription = stringResource(hero.descriptionRes),
+            contentScale = ContentScale.FillWidth,
+            alignment = Alignment.TopCenter
+
+        )
+    }
+}
+
+@Preview
+@Composable
+fun HeroItemPreview(){
+    HeroItem(hero = heroes[3])
 }
