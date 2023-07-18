@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -41,22 +42,21 @@ fun HeroItem(hero: Hero, modifier: Modifier = Modifier){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(dimensionResource(R.dimen.padding_medium))
                 .sizeIn(minHeight = dimensionResource(R.dimen.card_size))
+                .padding(dimensionResource(R.dimen.padding_medium))
         ) {
-            HeroInformation(hero, modifier)
+            HeroInformation(hero)
             Spacer(
-                modifier = modifier.width(dimensionResource(R.dimen.between_text_image_spacer))
+                modifier = Modifier.width(dimensionResource(R.dimen.between_text_image_spacer))
             )
-            HeroImage(hero, modifier)
+            HeroImage(hero, Modifier)
         }
     }
 }
 
 @Composable
-fun HeroInformation(hero: Hero, modifier: Modifier = Modifier) {
+fun HeroInformation(hero: Hero) {
     Column(
-        modifier = modifier
     ) {
         Text(
             text = stringResource(hero.nameRes),
@@ -74,6 +74,7 @@ fun HeroImage(hero: Hero, modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(hero.imageRes),
         contentDescription = stringResource(hero.descriptionRes),
+        contentScale = ContentScale.Crop,
         modifier = modifier
             .size(dimensionResource(R.dimen.image_size))
             .clip(MaterialTheme.shapes.small)
