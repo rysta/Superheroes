@@ -39,7 +39,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HeroesApp(modifier: Modifier = Modifier){
     LazyColumn(
-        contentPadding = PaddingValues(dimensionResource(R.dimen.padding_medium))
     ){
         items(heroes){
             HeroItem(
@@ -56,7 +55,7 @@ fun HeroesApp(modifier: Modifier = Modifier){
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun GreetingPreview() {
-    SuperheroesTheme {
+    SuperheroesTheme(darkTheme = false) {
         HeroesApp()
     }
 }
